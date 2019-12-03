@@ -21,7 +21,7 @@ def os_parser(versions_json, snmp_data):
     vendor = ""
 
     ubuntu_version_names_regex = os_version_names_regex(versions_json, 'ubuntu')
-    ubuntu_match = re.search(ubuntu_version_names_regex, snmp_data)
+    ubuntu_match = re.search(ubuntu_version_names_regex, snmp_data, flags=re.IGNORECASE)
     if ubuntu_match:
         # TODO: maybe ds instead of this assigning
         vendor = "canonical"
@@ -29,7 +29,7 @@ def os_parser(versions_json, snmp_data):
         version_number = extract_version_number(versions_json, ubuntu_match, os)
 
     centos_version_names_regex = os_version_names_regex(versions_json, os='centos')
-    centos_match = re.search(centos_version_names_regex, snmp_data)
+    centos_match = re.search(centos_version_names_regex, snmp_data, flags=re.IGNORECASE)
     if centos_match:
         vendor = "centos"
         os = "centos"
